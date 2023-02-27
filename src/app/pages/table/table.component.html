@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="menu">
+        <button class="btn-create" (click)="createBook()">Cadastrar Novo Livro</button>
+        <div class="nav-bar">
+            <form [formGroup]="searchForm" (ngSubmit)="search()">
+                <div>
+                    <input class="search" type="text" formControlName="toSearch" placeholder="Pesquisar... | Ex: Autor, Livro">
+                    <button class="btn" type="submit">Pesquisar</button>
+                </div>
+            </form>
+            <div>
+                <input type="checkbox" id="checkbox1" [(ngModel)]="checkbox1" (change)="uncheckBox2()">
+                <label for="checkbox1">Livro</label>
+                <input type="checkbox" id="checkbox2" [(ngModel)]="checkbox2" (change)="uncheckBox1()">
+                <label for="checkbox2">Autor</label>
+            </div>
+        </div>
+    </div>
+    <table id="table" *ngIf="books.length > 0">
+        <thead class="theader">
+            <th class="theader-item">Titulo</th>
+            <th class="theader-item">Subtitulo</th>
+            <th class="theader-item">Resumo</th>
+            <th class="theader-item">Quantidade de Paginas</th>
+            <th class="theader-item">Data de Publicacao</th>
+            <th class="theader-item">Editora</th>
+            <th class="theader-item">Edicao</th>
+            <th class="theader-item">Autor</th>
+            <th class="theader-item"></th>
+            <th class="theader-item"></th>
+        </thead>
+        <tbody class="tcontent">
+            <tr class="t-row" *ngFor="let book of books">
+                <td class="t-data">{{ book.title }}</td>
+                <td class="t-data">{{ book.subtitle || '-' }}</td>
+                <td class="t-data">{{ book.summary || '-' }}</td>
+                <td class="t-data">{{ book.pages }}</td>
+                <td class="t-data">{{ book.date | date : 'dd/MM/yyyy' }}</td>
+                <td class="t-data">{{ book.editor}}</td>
+                <td class="t-data">{{ book.edition }}</td>
+                <td class="t-data t-data-autor">
+                    <ul *ngFor="let autor of book.autors">
+                        <li>
+                            {{ autor.name }}
+                        </li>
+                    </ul>
+                </td>
+                <td class="t-data">
+                    <button class="secondary-btn" (click)="editBook(book)"><img class="data-treatment" src="../../../assets/pencil.png"></button>
+                </td>
+                <td class="t-data">
+                    <button class="secondary-btn" (click)="deleteBook(book)"><img class="data-treatment" src="../../../assets/trash.png"></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="a-div">
+        <a *ngIf="books.length === 0" href="">Autor ou Livro não encontrado, clique aqui para voltar</a>
+        <a *ngIf="searched" href="">Clique aqui para voltar</a>
+    </div>
+</div>
+
+
+<app-dialog *ngIf="isDialogVisible" [title]="dialogTitle" (close)="dialogClosed()">    
+    <app-create-book (close)="isDialogVisible = false" (updateTable)="newCreated($event)" [book]="booksToCreate"></app-create-book>
+</app-dialog>
+<app-dialog *ngIf="isDialogVisibleEdit" [title]="dialogTitle" (close)="dialogEditClosed()">
+    <app-edit-book (updateTable)="newCreated($event)" [book]="booksToEdit"></app-edit-book>
+</app-dialog>

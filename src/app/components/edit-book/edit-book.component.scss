@@ -1,0 +1,67 @@
+form{
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    label{
+        font-weight: 700;
+        font-size: 22px;
+    }
+    
+    input{
+        padding: 4px;
+        width: 350px;
+        font-size: 22px;
+        border-radius: 6px;
+    }
+
+    .submit{
+        align-self: flex-end;
+        width: 100px;
+        margin: 10px;
+        padding: 6px;
+        border-radius: 8px;
+        border: 4px solid rgb(40, 114, 11);
+        background-color: var(--btn-primary);
+        color: white;
+    }
+
+    .submit:hover{
+        cursor: pointer;
+        background-color: rgb(40, 114, 11);
+        transition: all ease-in-out .3s;
+    }
+}
+
+.autor-container{
+    display: flex;
+    gap: 10px;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 10px;
+
+    label{
+        display: block;
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    h4{
+        font-weight: 400;
+        font-size: 20px;
+    }
+}
+
+.secondary-btn{
+    border: none;
+    background-color: white;
+
+    .data-treatment{
+        height: 30px;
+    }
+}
+
+.secondary-btn:hover{
+    cursor: pointer;
+}

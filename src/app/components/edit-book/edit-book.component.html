@@ -1,0 +1,54 @@
+<div *ngIf="book">
+    <form [formGroup]="bookForm" (ngSubmit)="updateBook()">
+        <h2>{{ book.title }}</h2>
+        <div>
+            <label for="title">Titulo:</label>
+            <input id="title" [(ngModel)]="book.title"  placeholder="Titulo" formControlName="title"/>
+        </div>
+        <div>
+            <label for="subtitle">Subtitulo:</label>
+            <input id="subtitle" [(ngModel)]="book.subtitle" placeholder="Subtitulo"  formControlName="subtitle"/>
+        </div>
+        <div>
+            <label for="summary">Resumo:</label>
+            <input id="summary" [(ngModel)]="book.summary" placeholder="Resumo"  formControlName="summary"/>
+        </div>
+        <div>
+            <label for="pages">Paginas:</label>
+            <input id="pages" [(ngModel)]="book.pages" placeholder="Qtde. Paginas" formControlName="pages"/>
+        </div>
+        <div>
+            <label for="date">Data de Publicacao:</label>
+            <input id="date" type="date" formControlName="date">
+        </div>
+        <div>
+            <label for="editor">Editor:</label>
+            <input id="editor" [(ngModel)]="book.editor" placeholder="Editor" formControlName="editor"/>
+        </div>
+        <div>
+            <label for="edition">Edicao:</label>
+            <input id="edition" [(ngModel)]="book.edition" placeholder="Edicao" formControlName="edition" value=0/>
+        </div>
+        <button class="submit" type="submit" *ngIf="book.id">Salvar</button>
+    </form>
+    <div class="autor-container" *ngFor="let autor of book.autors">
+        <label for="autorName">Autor: </label>
+        <h4>{{ autor.name }}</h4>
+        <button class="secondary-btn" (click)="editAutor(autor)"><img class="data-treatment" src="../../../assets/pencil.png"></button>
+        <button class="secondary-btn" (click)="deleteAutor(autor, book)"><img class="data-treatment" src="../../../assets/trash.png"></button>
+    </div>
+    <div *ngIf="autor">
+        <form *ngIf="editFalse" [formGroup]="editAutorForm" (ngSubmit)="updateAutor()">
+            <label for="name">Autor: </label>
+            <input id="name" formControlName="name" type="text" [(ngModel)]="autor.name">
+            <button class="submit" type="submit">Enviar Autor</button>
+        </form>
+    </div>
+    <div class="autor-container">
+        <form *ngIf="reFalse" [formGroup]="autorForm" (ngSubmit)="createNewAutor()">
+            <input  formControlName="name" type="text" placeholder="Autor">
+            <button class="submit" type="submit">Enviar Autor</button>
+        </form>
+    </div>
+    <button *ngIf="!reFalse" class="secondary-btn" (click)="newAutor()"><img class="data-treatment" src="../../../assets/plus.png"></button>
+</div>

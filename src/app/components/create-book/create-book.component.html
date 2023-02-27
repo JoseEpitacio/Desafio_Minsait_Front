@@ -1,0 +1,41 @@
+<form [formGroup]="bookForm" *ngIf="book" (ngSubmit)="createAutorBook()">
+    <h2>{{ book.title }}</h2>
+    <div>
+        <label for="title">*Titulo: </label>
+        <input id="title" [(ngModel)]="book.title"  placeholder="Titulo" formControlName="title"/>
+        <p class="alert" *ngIf="alertP">*Campo Obrigatório</p>
+    </div>
+    <div>
+        <label for="subtitle">Subtitulo: </label>
+        <input id="subtitle" [(ngModel)]="book.subtitle" placeholder="Subtitulo" formControlName="subtitle"/>
+    </div>
+    <div>
+        <label for="summary">Resumo: </label>
+        <input id="summary" [(ngModel)]="book.summary" placeholder="Resumo"  formControlName="summary"/>
+    </div>
+    <div>
+        <label for="pages">*Paginas:</label>
+        <input id="pages" [(ngModel)]="book.pages" placeholder="Qtde. Paginas" formControlName="pages"/>
+        <p class="alert" *ngIf="alertP">*Campo Obrigatório</p>
+    </div>
+    <div>
+        <label for="date">*Data de Publicacao: </label>
+        <input id="date" [(ngModel)]="book.date" type="date"  formControlName="date">
+        <p class="alert" *ngIf="alertP">*Campo Obrigatório</p>
+    </div>
+    <div>
+        <label for="editor">*Editora: </label>
+        <input id="editor" [(ngModel)]="book.editor" placeholder="Editor" formControlName="editor"/>
+        <p class="alert" *ngIf="alertP">*Campo Obrigatório</p>
+    </div>
+    <div>
+        <label for="edition">Edicao: </label>
+        <input id="edition" [(ngModel)]="book.edition" placeholder="Edicao" formControlName="edition" value=0/>
+    </div>
+    <div>
+        <label for="autorName">*Autor: </label>
+        <input id="autorName" [(ngModel)]="book.autorName" placeholder="Autor" formControlName="autorName"/>
+        <p class="alert" *ngIf="alertP">*Campo Obrigatório</p>
+    </div>
+    <button class="submit" type="submit">Novo</button>
+</form>
